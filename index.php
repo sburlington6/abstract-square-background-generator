@@ -61,10 +61,6 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
 		<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 		
 		<script src="html2canvas/html2canvas.js"></script>
-		<script src="html2canvas/FileSaver.js"></script>
-		<script src="html2canvas/canvas-toBlob.js"></script>
-		
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.1/isotope.pkgd.min.js"></script>
 		
 		<script>
 			
