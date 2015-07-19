@@ -1,0 +1,28 @@
+#grid{
+	padding: 0px;
+}
+
+.item{
+	
+	border: 1px solid #000;
+	display: inline;
+	width: 48%;
+	height: 50%;
+	
+}
+
+.grid-item {
+  float: left;
+ /* width: 10vw;
+  height: 10vw;*/
+  width:9.6%;
+  padding-bottom:9.6%;
+}
+
+
+/* fluid 5 columns */
+.grid-sizer, 
+.grid-item { 
+
+margin: .2%;
+}
