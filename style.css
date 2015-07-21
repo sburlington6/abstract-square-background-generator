@@ -1,6 +1,6 @@
 #grid{
 	padding: 0px;
-	overflow: auto;
+	overflow: hidden;
 	position: relative;
 }
 
