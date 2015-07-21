@@ -1,7 +1,17 @@
 <?php
 
 
-$url = (isset($_REQUEST['url']) ? $_REQUEST['url'] : "test.jpg");
+//$url = (isset($_REQUEST['url']) and $_REQUEST['url'] != "" ? $_REQUEST['url'] : "test.jpg");
+
+if (isset($_REQUEST['url']) and $_REQUEST['url'] != "")
+{
+	$url=$_REQUEST['url'];
+}
+else
+{
+	$url="test.jpg";
+}
+
 
 function colorPalette($imageFile, $numColors, $granularity = 5) 
 { 
@@ -63,18 +73,15 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
 		<script src="html2canvas/html2canvas.js"></script>
 		
 		<script>
-			
-
-
-$(document).ready(function()  { 
-    //$("#btnSave").click(function() { 
-        html2canvas($("body"), {
-            onrendered: function(canvas) {
-               document.body.appendChild(canvas);
-            }
-        });
-    //});
-}); 
+		$(document).ready(function()  { 
+			//$("#btnSave").click(function() { 
+				html2canvas($("#grid"), {
+					onrendered: function(canvas) {
+					   document.body.appendChild(canvas);
+					}
+				});
+			//});
+		}); 
 		</script>
 
 		<!--[if lt IE 9]>
@@ -83,13 +90,14 @@ $(document).ready(function()  {
 	</head>
 
 	<body>
-		
-		
-		
+		<form action="index.php" method="get">
+		  URL: <input type="text" name="url" value="<?php echo $url; ?>"><br>
+		  <input type="submit" value="Submit">
+		</form>
 		<div id="grid" class="grid">
 			<?php
 			$palette = colorPalette($url, 10, 4); 
-				for ($i=0;$i<100;$i++)
+				for ($i=0;$i<10;$i++)
 				{
 					$random = rand(0,9);
 					echo ('<div style="background-color:#'.$palette[$random].';" class="grid-item" id="item'.$i.'"></div>');
@@ -97,6 +105,6 @@ $(document).ready(function()  {
 				}
 			?>
 		</div>
-		
+			
 	</body>
 </html>
