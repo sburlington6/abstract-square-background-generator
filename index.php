@@ -20,25 +20,25 @@ else
 
 
 function colorPalette($imageFile, $numColors, $granularity = 5) 
-{ 
+{
    $granularity = max(1, abs((int)$granularity)); 
    $colors = array(); 
    $size = @getimagesize($imageFile); 
    if($size === false) 
-   { 
+   {
       user_error("Unable to get image size data"); 
       return false; 
-   } 
+   }
    $img = @imagecreatefromjpeg($imageFile); 
    if(!$img) 
-   { 
+   {
       user_error("Unable to open image file"); 
       return false; 
-   } 
+   }
    for($x = 0; $x < $size[0]; $x += $granularity) 
-   { 
+   {
       for($y = 0; $y < $size[1]; $y += $granularity) 
-      { 
+      {
          $thisColor = imagecolorat($img, $x, $y); 
          $rgb = imagecolorsforindex($img, $thisColor); 
          $red = round(round(($rgb['red'] / 0x33)) * 0x33);  
@@ -46,15 +46,15 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
          $blue = round(round(($rgb['blue'] / 0x33)) * 0x33);  
          $thisRGB = sprintf('%02X%02X%02X', $red, $green, $blue); 
          if(array_key_exists($thisRGB, $colors)) 
-         { 
+         {
             $colors[$thisRGB]++; 
-         } 
+         }
          else 
-         { 
+         {
             $colors[$thisRGB] = 1; 
-         } 
-      } 
-   } 
+         }
+      }
+   }
    arsort($colors); 
    return array_slice(array_keys($colors), 0, $numColors); 
 } 
@@ -110,17 +110,22 @@ $numBoxes = ceil($height/($width*($bWidth/100)))*$numCols;
 			 
 			 $( ".draggable" ).draggable({ containment: "parent", scroll: false, cursor: "move" });
 			 
+			 $( "#toggle-colors" )
+      .click(function() {
+			$( ".color" ).toggle();
+      });
+			 
 			 
     var tooltips = $( "[title]" ).tooltip({
       position: {
-        my: "left top",
-        at: "right+5 top-5"
+        my: "left center",
+        at: "right+5 center"
       }
     });
     $( "#help-button" )
       .click(function() {
         tooltips.tooltip( "open" );
-      })
+      });
   });
 		</script>
 
@@ -137,9 +142,11 @@ $numBoxes = ceil($height/($width*($bWidth/100)))*$numCols;
 				<label for="numCols">Columns</label><input type="number" name="numCols" id="numCols" value="<?php echo $numCols; ?>" title="Sets the number of columns"><br>
 				<label for="numColors">numColors</label><input type="number" name="numColors" id="numColors" value="<?php echo $numColors; ?>" title="Sets the number of colors to generate from the image"><br>
 				<label for="numBoxes">numBoxes</label><input type="number" name="numBoxes" id="numBoxes" value="<?php echo $numBoxes; ?>" title="Sets the number of boxes that will be generated"><br>
-				<label for="margin">margin</label><input type="number" name="margin" id="margin" value="<?php echo $margin; ?>" title=""><br>
-				<label for="width">width</label><input type="number" name="width" id="width" value="<?php echo $width; ?>" title=""><br>
-				<label for="height">height</label><input type="number" name="height" id="height" value="<?php echo $height; ?>" title=""><br>
+				<label for="margin">margin</label><input type="text" name="margin" id="margin" value="<?php echo $margin; ?>" title="Sets the spacing between boxes"><br>
+				<label for="width">width</label><input type="number" name="width" id="width" value="<?php echo $width; ?>" title="Sets the width of the generated image"><br>
+				<label for="height">height</label><input type="number" name="height" id="height" value="<?php echo $height; ?>" title="Sets the height of the generated image"><br>
+				
+				<button class="btn" type="button" id="toggle-colors">Toggle Colors</button>
 			</fieldset>
 			<fieldset id="settings-action">
 				<input class="btn" type="submit" value="Generate">
@@ -159,7 +166,11 @@ $numBoxes = ceil($height/($width*($bWidth/100)))*$numCols;
 				for ($i=0;$i<$numBoxes;$i++)
 				{
 					$random = rand(0,($numColors-1));
-					echo ('<div style="background-color:#'.$palette[$random].';width:'.$bWidth.'%; padding-bottom:'.$bWidth.'%;margin: '.$margin.'%;" class="grid-item" id="item'.$i.'"></div>');
+					if ($palette[$random] == "FFFFFF")
+					{
+						$random = rand(0,($numColors-1));
+					}
+					echo ('<div style="background-color:#'.$palette[$random].';width:'.$bWidth.'%; padding-bottom:'.$bWidth.'%;margin: '.$margin.'%;" class="grid-item" id="item'.$i.'"><span class="color">'.$palette[$random].'</span></div>');
 					
 				}
 			?>

@@ -20,12 +20,12 @@ background: #fff;
 
 .grid-item {
   float: left;
- 
- 
- 
-shape-outside: circle(50%);
-  
- 
+position: relative;
+}
+
+.color{
+display:none;
+position: absolute;
 }
 
 .grid-item { 
@@ -78,7 +78,7 @@ text-align: center;
   border-top: 1px solid #c6c7cc;
   padding: 20px;
 }
-#settings-action .btn {
+.btn {
 
   border-radius: 5px;
   border: 1px solid blue;
