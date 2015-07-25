@@ -104,7 +104,8 @@ $numBoxes = ceil($height/($width*($bWidth/100)))*$numCols;
 					}
 				});
 			}); 
-			 
+			
+			//makes settings form draggable
 			$( ".draggable" ).draggable({ containment: "parent", scroll: false, cursor: "move" });
 
 			//toggles the color labels on the grid items
@@ -124,6 +125,21 @@ $numBoxes = ceil($height/($width*($bWidth/100)))*$numCols;
 			$( "#help-button" ).click(function() {
 				tooltips.tooltip( "open" );
 			});
+			
+			
+			//update margin of items on margin input change
+			/*
+			$( "#margin" ).change(function() {
+				//alert( $( this ).val() );
+				$( ".grid-item" ).css( "margin", $( this ).val() + "%" );
+			});
+			*/
+			//update background color on input change
+			$( "#background" ).change(function() {
+				//alert( $( this ).val() );
+				$( ".grid" ).css( "background", $( this ).val() );
+			});
+			
 		});
 		</script>
 
