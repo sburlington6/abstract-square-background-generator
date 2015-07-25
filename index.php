@@ -91,42 +91,50 @@ $numBoxes = ceil($height/($width*($bWidth/100)))*$numCols;
 		
 		
 		
+		<script src="html2canvas/Blob.js"></script>
+		<script src="html2canvas/canvas-toBlob.js"></script>
+		<script src="html2canvas/FileSaver.min.js"></script>
 		<script src="html2canvas/html2canvas.js"></script>
 		
 		<script>
-		$(document).ready(function()  { 
-			//$("#btnSave").click(function() { 
+		
+		
+		
+		
+		$(function() {
+			
+			//when save button is clicked
+			$( "#save-button" ).click(function() {
+				//start html2canvas
 				html2canvas($("#grid"), {
 					onrendered: function(canvas) {
-					   document.body.appendChild(canvas);
+						theCanvas = canvas;
+						//convert canvas to blob
+						canvas.toBlob(function(blob) {
+							//save the background to a file
+							saveAs(blob, "background.png"); 
+						});
 					}
 				});
-			//});
-		}); 
-		
-		
-		
-		 $(function() {
+			}); 
 			 
-			 $( ".draggable" ).draggable({ containment: "parent", scroll: false, cursor: "move" });
+			$( ".draggable" ).draggable({ containment: "parent", scroll: false, cursor: "move" });
 			 
-			 $( "#toggle-colors" )
-      .click(function() {
-			$( ".color" ).toggle();
-      });
+			$( "#toggle-colors" ).click(function() {
+				$( ".color" ).toggle();
+			});
 			 
 			 
-    var tooltips = $( "[title]" ).tooltip({
-      position: {
-        my: "left center",
-        at: "right+5 center"
-      }
-    });
-    $( "#help-button" )
-      .click(function() {
-        tooltips.tooltip( "open" );
-      });
-  });
+			var tooltips = $( "[title]" ).tooltip({
+				position: {
+					my: "left center",
+					at: "right+5 center"
+				}
+			});
+			$( "#help-button" ).click(function() {
+				tooltips.tooltip( "open" );
+			});
+		});
 		</script>
 
 		<!--[if lt IE 9]>
@@ -150,6 +158,7 @@ $numBoxes = ceil($height/($width*($bWidth/100)))*$numCols;
 			</fieldset>
 			<fieldset id="settings-action">
 				<input class="btn" type="submit" value="Generate">
+				<button class="btn" type="button" id="save-button">Save</button>
 				<button class="btn" type="button" id="help-button">Help</button>
 			</fieldset>
 			
