@@ -148,34 +148,36 @@ $numBoxes = ceil($height/($width*($bWidth/100)))*$numCols;
 		<![endif]-->
 	</head>
 	<body>
-		<form class="draggable" id="settings-form" action="index.php" method="get">
-			<fieldset id="settings">
-				<legend>Settings</legend>
-				<button class="btn" type="button" id="toggle-colors">Toggle Colors</button>
-				<br/>
-				<label for="url">URL</label><input type="text" name="url" id="url" value="<?php echo $url; ?>" title="Image must be in JPG format">
-				<br/>
-				<label for="numCols">Columns</label><input type="number" name="numCols" id="numCols" value="<?php echo $numCols; ?>" title="Sets the number of columns">
-				<br/>
-				<label for="numColors">numColors</label><input type="number" name="numColors" id="numColors" value="<?php echo $numColors; ?>" title="Sets the number of colors to generate from the image">
-				<br/>
-				<label for="numBoxes">numBoxes</label><input type="number" name="numBoxes" id="numBoxes" value="<?php echo $numBoxes; ?>" title="Sets the number of boxes that will be generated (set automatically when dimensions are set)">
-				<br/>
-				<label for="margin">margin</label><input type="text" name="margin" id="margin" value="<?php echo $margin; ?>" title="Sets the spacing between boxes">
-				<br/>
-				<label for="width">width</label><input type="number" name="width" id="width" value="<?php echo $width; ?>" title="Sets the width of the generated image">
-				<br/>
-				<label for="height">height</label><input type="number" name="height" id="height" value="<?php echo $height; ?>" title="Sets the height of the generated image">
-				<br/>
-				<label for="background">background color</label><input type="color" name="background" id="background" value="<?php echo $background; ?>" title="Sets the background color of the generated image">
-				<br/>
-			</fieldset>
-			<fieldset id="settings-action">
-				<input class="btn" type="submit" value="Generate">
-				<button class="btn" type="button" id="save-button">Save</button>
-				<button class="btn" type="button" id="help-button">Help</button>
-			</fieldset>
-		</form>
+		<div class="draggable" id="settings-wrapper">
+			<h2>Settings</h2>
+			<form id="settings-form" action="index.php" method="get">
+				<fieldset id="settings">
+					<button class="btn" type="button" id="toggle-colors">Toggle Colors</button>
+					<br/>
+					<label for="url">URL</label><input type="text" name="url" id="url" value="<?php echo $url; ?>" title="Image must be in JPG format">
+					<br/>
+					<label for="numCols">Columns</label><input type="number" name="numCols" id="numCols" value="<?php echo $numCols; ?>" title="Sets the number of columns">
+					<br/>
+					<label for="numColors">numColors</label><input type="number" name="numColors" id="numColors" value="<?php echo $numColors; ?>" title="Sets the number of colors to generate from the image">
+					<br/>
+					<label for="numBoxes">numBoxes</label><input type="number" name="numBoxes" id="numBoxes" value="<?php echo $numBoxes; ?>" title="Sets the number of boxes that will be generated (set automatically when dimensions are set)">
+					<br/>
+					<label for="margin">margin</label><input type="text" name="margin" id="margin" value="<?php echo $margin; ?>" title="Sets the spacing between boxes">
+					<br/>
+					<label for="width">width</label><input type="number" name="width" id="width" value="<?php echo $width; ?>" title="Sets the width of the generated image">
+					<br/>
+					<label for="height">height</label><input type="number" name="height" id="height" value="<?php echo $height; ?>" title="Sets the height of the generated image">
+					<br/>
+					<label for="background">background color</label><input type="color" name="background" id="background" value="<?php echo $background; ?>" title="Sets the background color of the generated image">
+					<br/>
+				</fieldset>
+				<fieldset id="settings-action">
+					<input class="btn" type="submit" value="Generate">
+					<button class="btn" type="button" id="save-button">Save</button>
+					<button class="btn" type="button" id="help-button">Help</button>
+				</fieldset>
+			</form>
+		</div>
 			<?php
 			echo ("<div style='width:".$width."px; height:".$height."px; background:".$background."; ' id='grid' class='grid'>");
 			
