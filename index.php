@@ -77,10 +77,19 @@ $numBoxes = ceil($height/($width*($bWidth/100)))*$numCols;
 		<meta name="description" content="abstract-square-background-generator">
 		<meta name="author" content="Richard Bird">
 
+		 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+ 
+		
 		<link rel="stylesheet" href="style.css">
 		
-		<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-		<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+		
+		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+		
+		
+		<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+		
+		
 		
 		<script src="html2canvas/html2canvas.js"></script>
 		
@@ -94,6 +103,25 @@ $numBoxes = ceil($height/($width*($bWidth/100)))*$numCols;
 				});
 			//});
 		}); 
+		
+		
+		
+		 $(function() {
+			 
+			 $( ".draggable" ).draggable({ containment: "parent", scroll: false, cursor: "move" });
+			 
+			 
+    var tooltips = $( "[title]" ).tooltip({
+      position: {
+        my: "left top",
+        at: "right+5 top-5"
+      }
+    });
+    $( "#help-button" )
+      .click(function() {
+        tooltips.tooltip( "open" );
+      })
+  });
 		</script>
 
 		<!--[if lt IE 9]>
@@ -102,15 +130,22 @@ $numBoxes = ceil($height/($width*($bWidth/100)))*$numCols;
 	</head>
 
 	<body>
-		<form action="index.php" method="get">
-		  URL: <input type="text" name="url" value="<?php echo $url; ?>"><br>
-		  Columns: <input type="text" name="numCols" value="<?php echo $numCols; ?>"><br>
-		  numColors: <input type="text" name="numColors" value="<?php echo $numColors; ?>"><br>
-		  numBoxes: <input type="text" name="numBoxes" value="<?php echo $numBoxes; ?>"><br>
-		  margin: <input type="text" name="margin" value="<?php echo $margin; ?>"><br>
-		  width: <input type="text" name="width" value="<?php echo $width; ?>"><br>
-		  height: <input type="text" name="height" value="<?php echo $height; ?>"><br>
-		  <input type="submit" value="Submit">
+		<form class="draggable" id="settings-form" action="index.php" method="get">
+			<fieldset id="settings">
+				<legend>Settings</legend>
+				<label for="url">URL</label><input type="text" name="url" id="url" value="<?php echo $url; ?>" title="Image must be in JPG format"><br>
+				<label for="numCols">Columns</label><input type="number" name="numCols" id="numCols" value="<?php echo $numCols; ?>" title="Sets the number of columns"><br>
+				<label for="numColors">numColors</label><input type="number" name="numColors" id="numColors" value="<?php echo $numColors; ?>" title="Sets the number of colors to generate from the image"><br>
+				<label for="numBoxes">numBoxes</label><input type="number" name="numBoxes" id="numBoxes" value="<?php echo $numBoxes; ?>" title="Sets the number of boxes that will be generated"><br>
+				<label for="margin">margin</label><input type="number" name="margin" id="margin" value="<?php echo $margin; ?>" title=""><br>
+				<label for="width">width</label><input type="number" name="width" id="width" value="<?php echo $width; ?>" title=""><br>
+				<label for="height">height</label><input type="number" name="height" id="height" value="<?php echo $height; ?>" title=""><br>
+			</fieldset>
+			<fieldset id="settings-action">
+				<input class="btn" type="submit" value="Generate">
+				<button class="btn" type="button" id="help-button">Help</button>
+			</fieldset>
+			
 		</form>
 			<?php
 			
