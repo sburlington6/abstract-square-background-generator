@@ -2,6 +2,9 @@ body{
 	font: 14px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.center{
+text-align: center;
+}
 
 #grid{
 	padding: 0px;
@@ -13,7 +16,6 @@ body{
 	z-index:200;
 	position: fixed;
 	background: #fff;
-	padding: 0px 40px 0px 20px;
 	border: 1px solid #c6c7cc;
 	border-radius: 5px;
 	width: 300px;
@@ -49,6 +51,7 @@ input {
 	margin: 0;
 }
 #settings {
+	padding: 0px 40px 0px 20px;
 }
 #settings legend{
 	text-align: center;
@@ -74,7 +77,6 @@ input {
 	background: #f0f0f2;
 	border-top: 1px solid #c6c7cc;
 	padding: 20px;
-	width: 100%;
 }
 .btn {
 	border-radius: 5px;

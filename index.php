@@ -78,6 +78,8 @@ $numBoxes = ceil($height/($width*($bWidth/100)))*$numCols;
  
 		<link rel="stylesheet" href="style.css">
 		
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 		
@@ -106,11 +108,21 @@ $numBoxes = ceil($height/($width*($bWidth/100)))*$numCols;
 			}); 
 			
 			//makes settings form draggable
-			$( ".draggable" ).draggable({ containment: "parent", scroll: false, cursor: "move" });
+			$( ".draggable" ).draggable({ 
+			containment: "parent", 
+			scroll: false, 
+			cursor: "move"
+			});
 
 			//toggles the color labels on the grid items
 			$( "#toggle-colors" ).click(function() {
 				$( ".color" ).toggle();
+			});
+			
+			$( "#settingsToggle" ).click(function() {
+			  $( this ).toggleClass( "fa-caret-square-o-up" );
+			  $( this ).toggleClass( "fa-caret-square-o-down" );
+			  $( "#settings-form" ).toggle( "blind", "slow" );
 			});
 			
 			//displays tooltips
@@ -149,7 +161,8 @@ $numBoxes = ceil($height/($width*($bWidth/100)))*$numCols;
 	</head>
 	<body>
 		<div class="draggable" id="settings-wrapper">
-			<h2>Settings</h2>
+			<h2 class="center">Settings <i id="settingsToggle" class="right fa fa-caret-square-o-up"></i></h2>
+			
 			<form id="settings-form" action="index.php" method="get">
 				<fieldset id="settings">
 					<button class="btn" type="button" id="toggle-colors">Toggle Colors</button>
