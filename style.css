@@ -5,6 +5,9 @@ body{
 .center{
 text-align: center;
 }
+.right{
+text-align: right;
+}
 
 #grid{
 	padding: 0px;

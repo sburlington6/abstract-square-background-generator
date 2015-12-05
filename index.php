@@ -6,7 +6,7 @@ $numBoxes = (isset($_REQUEST['numBoxes']) ? $_REQUEST['numBoxes'] : 10);
 $margin = (isset($_REQUEST['margin']) ? $_REQUEST['margin'] : .2);
 $width = (isset($_REQUEST['width']) ? $_REQUEST['width'] : 1920);
 $height = (isset($_REQUEST['height']) ? $_REQUEST['height'] : 1080);
-$background = (isset($_REQUEST['background']) ? $_REQUEST['background'] : "#ffffff");
+$background = (isset($_REQUEST['background']) ? $_REQUEST['background'] : "#000");
 
 if (isset($_REQUEST['url']) and $_REQUEST['url'] != "")
 {
@@ -92,6 +92,16 @@ $numBoxes = ceil($height/($width*($bWidth/100)))*$numCols;
 		
 		<script>
 		$(function() {
+			
+			
+			if($("input:radio[name='circle']").is(":checked")) {
+				alert('circle');
+			}
+			if($("input:radio[name='square']").is(":checked")) {
+				alert('square');
+			}
+			
+			
 			//when save button is clicked
 			$( "#save-button" ).click(function() {
 				//start html2canvas
@@ -165,6 +175,12 @@ $numBoxes = ceil($height/($width*($bWidth/100)))*$numCols;
 			
 			<form id="settings-form" action="index.php" method="get">
 				<fieldset id="settings">
+				
+					<label for="circle">Circle</label><input type="radio" name="shape" value="circle" id="circle" checked>
+					<br>
+					<label for="square">Square</label><input type="radio" name="shape" value="square" id="square"> 
+					<br>
+					
 					<button class="btn" type="button" id="toggle-colors">Toggle Colors</button>
 					<br/>
 					<label for="url">URL</label><input type="text" name="url" id="url" value="<?php echo $url; ?>" title="Image must be in JPG format">
@@ -194,18 +210,31 @@ $numBoxes = ceil($height/($width*($bWidth/100)))*$numCols;
 			<?php
 			echo ("<div style='width:".$width."px; height:".$height."px; background:".$background."; ' id='grid' class='grid'>");
 			
-			$palette = colorPalette($url,$numColors, 4); 
+			//$palette = colorPalette($url,$numColors, 4); 
+			
+			//for circles
+			$palette = array('red', 'blue', 'green');
+			//$radius = ($width*$bWidth/100/2).'px';
+			$radius = ($width*$bWidth/100/2).'px';
+			
+			
 			$numColors=count($palette);
-				for ($i=0;$i<$numBoxes;$i++)
+			for ($i=0;$i<$numBoxes;$i++)
+			{
+				$random = rand(0,($numColors-1));
+				if ($palette[$random] == "FFFFFF")
 				{
 					$random = rand(0,($numColors-1));
-					if ($palette[$random] == "FFFFFF")
-					{
-						$random = rand(0,($numColors-1));
-					}
-					echo ('<div style="background-color:#'.$palette[$random].';width:'.$bWidth.'%; padding-bottom:'.$bWidth.'%;margin: '.$margin.'%;" class="grid-item" id="item'.$i.'"><span class="color">'.$palette[$random].'</span></div>');
-					
 				}
+				//echo ('<div style="background-color:#'.$palette[$random].';width:'.$bWidth.'%; padding-bottom:'.$bWidth.'%;margin: '.$margin.'%;" class="grid-item" id="item'.$i.'"><span class="color">'.$palette[$random].'</span></div>');
+				
+				//for circles
+				$top = rand(0,($height-floor($bWidth)));
+				$left = rand(0,($width-floor($bWidth)));
+				$opacity = rand(5,10);
+				echo ('<div style="box-shadow: 0px 0px 5px #fff;opacity: 0.'.$opacity.';border: 10px solid transparent;border-radius:'.$radius .'; position: absolute; top:'.$top.'px; left:'.$left.'px; background-color:'.$palette[$random].';width:'.$bWidth.'%; padding-bottom:'.$bWidth.'%;margin: '.$margin.'%;" class="grid-item" id="item'.$i.'"><span class="color">'.$palette[$random].'</span></div>');
+				
+			}
 			?>
 		</div>
 	</body>
